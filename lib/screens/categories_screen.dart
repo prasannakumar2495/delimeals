@@ -1,6 +1,7 @@
-import 'package:delimeals/category_item.dart';
 import 'package:delimeals/dummy_data.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/category_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class CategoriesScreen extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        children: DUMMY_CONSTANTS
+        children: DUMMY_CATEGORIES
             .map(
               (catData) => CategoryItem(
                 id: catData.id,

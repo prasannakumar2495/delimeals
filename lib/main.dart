@@ -1,6 +1,7 @@
-import 'package:delimeals/category_meals_screen.dart';
 import 'package:flutter/material.dart';
-import 'categories_screen.dart';
+
+import 'screens/categories_screen.dart';
+import 'screens/category_meals_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,9 +33,14 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: const CategoriesScreen(),
+      //home: const CategoriesScreen(),
+      /**
+       * Home screen can be accesed in both ways.
+       * '/' => this is default value.
+       */
       routes: {
-        '/categories': ((context) => CategoryMealsScreen()),
+        '/': (context) => const CategoriesScreen(),
+        CategoryMealsScreen.rounteName: ((context) => CategoryMealsScreen()),
       },
     );
   }
