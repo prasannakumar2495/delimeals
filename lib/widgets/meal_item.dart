@@ -1,7 +1,9 @@
 import 'package:delimeals/models/meal.dart';
+import 'package:delimeals/screens/meals_details.dart';
 import 'package:flutter/material.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -10,6 +12,7 @@ class MealItem extends StatelessWidget {
 
   const MealItem({
     Key? key,
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
@@ -41,11 +44,17 @@ class MealItem extends StatelessWidget {
     }
   }
 
-  void seletMeal() {}
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      MealDetailsScreen.routeName,
+      arguments: id,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: seletMeal,
+      onTap: () => selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),

@@ -1,3 +1,5 @@
+import 'package:delimeals/screens/meals_details.dart';
+import 'package:delimeals/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/categories_screen.dart';
@@ -39,9 +41,26 @@ class MyApp extends StatelessWidget {
        * '/' => this is default value.
        */
       routes: {
-        '/': (context) => const CategoriesScreen(),
+        '/': (context) => const TabScreen(),
         CategoryMealsScreen.rounteName: ((context) => CategoryMealsScreen()),
+        MealDetailsScreen.routeName: (context) => const MealDetailsScreen(),
       },
+      onGenerateRoute: ((settings) {
+        /**
+         * this will be used, when no named route has been metioned and the navigation will be made to the 
+         * screen mentioned below.
+         */
+        return MaterialPageRoute(
+          builder: ((context) => const CategoriesScreen()),
+        );
+      }),
+      onUnknownRoute: ((settings) {
+        /**
+         * this will be triggered, to avoid the application from crashing.
+         */
+        return MaterialPageRoute(
+            builder: (context) => const CategoriesScreen());
+      }),
     );
   }
 }
