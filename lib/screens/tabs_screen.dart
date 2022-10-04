@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:delimeals/screens/categories_screen.dart';
+import 'package:delimeals/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'favourites_screen.dart';
@@ -42,6 +43,7 @@ class _TabScreenState extends State<TabScreen> {
       appBar: AppBar(
         title: Text(_pages[_selectedPageIndex]['title'].toString()),
       ),
+      drawer: const MainDrawer(),
       body: _pages[_selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
@@ -58,7 +60,7 @@ class _TabScreenState extends State<TabScreen> {
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            icon: const Icon(Icons.star),
+            icon: const Icon(Icons.favorite),
             label: 'Favourites',
           ),
         ],
@@ -79,12 +81,13 @@ class _TabScreenState extends State<TabScreen> {
                 text: 'Categories',
               ),
               Tab(
-                icon: Icon(Icons.category),
+                icon: Icon(Icons.favorite),
                 text: 'Favourites',
               ),
             ],
           ),
         ),
+        drawer: const MainDrawer(),
         body: const TabBarView(
           children: <Widget>[
             CategoriesScreen(),
