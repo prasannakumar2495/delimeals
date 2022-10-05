@@ -1,5 +1,4 @@
 import 'package:delimeals/dummy_data.dart';
-import 'package:delimeals/models/meal.dart';
 import 'package:flutter/material.dart';
 
 class MealDetailsScreen extends StatelessWidget {
@@ -15,9 +14,10 @@ class MealDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        selectedMeal.title,
-      )),
+        title: Text(
+          selectedMeal.title,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -73,6 +73,14 @@ class MealDetailsScreen extends StatelessWidget {
             ))
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(
+            mealId,
+          );
+        },
       ),
     );
   }
