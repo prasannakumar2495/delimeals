@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:delimeals/models/meal.dart';
 import 'package:delimeals/screens/categories_screen.dart';
 import 'package:delimeals/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +8,15 @@ import 'package:flutter/material.dart';
 import 'favourites_screen.dart';
 
 class TabScreen extends StatefulWidget {
-  const TabScreen({Key? key}) : super(key: key);
+  List<Meal> favouriteMeals;
+  TabScreen({Key? key, required this.favouriteMeals}) : super(key: key);
 
   @override
   State<TabScreen> createState() => _TabScreenState();
 }
 
 class _TabScreenState extends State<TabScreen> {
-  final List<Map<String, Object>> _pages = [
-    {
-      'page': const CategoriesScreen(),
-      'title': 'Categories',
-    },
-    {
-      'page': const FavouritesScreen(),
-      'title': 'Favourites',
-    },
-  ];
+  late List<Map<String, Object>> _pages;
 
   int _selectedPageIndex = 0;
 
@@ -31,6 +24,21 @@ class _TabScreenState extends State<TabScreen> {
     setState(() {
       _selectedPageIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    _pages = [
+      {
+        'page': const CategoriesScreen(),
+        'title': 'Categories',
+      },
+      {
+        'page': FavouritesScreen(favouriteMeals: widget.favouriteMeals),
+        'title': 'Favourites',
+      },
+    ];
+    super.initState();
   }
 
   @override
@@ -88,10 +96,12 @@ class _TabScreenState extends State<TabScreen> {
           ),
         ),
         drawer: const MainDrawer(),
-        body: const TabBarView(
+        body: TabBarView(
           children: <Widget>[
-            CategoriesScreen(),
-            FavouritesScreen(),
+            const CategoriesScreen(),
+            FavouritesScreen(
+              favouriteMeals: widget.favouriteMeals,
+            ),
           ],
         ),
       ),
